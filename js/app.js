@@ -15,13 +15,6 @@ function generateCard(card) {
     return `<li class="card" data-card="${card}"><i class="fa ${card}"></i></li>`;
 }
 
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
-
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -49,22 +42,27 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
+
 function initGame() {
     var deck = document.querySelector(".deck");
     var cardHTML = shuffle(cards).map(function(card){
         return generateCard(card);
     });
-    
+   
     deck.innerHTML = cardHTML.join('');
 }
-
 initGame();
 
 var allCards = document.querySelectorAll('.card');
 var openCards = [];
+var moves = document.getElementById('moves').textContent;
+let hours = 0;
+let minutes = 0;
+let seconds = 0;
 
 allCards.forEach(function(card) {
     card.addEventListener('click', function(e) {
+        startClock();
         
         if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match')) {
             openCards.push(card);
@@ -81,6 +79,7 @@ allCards.forEach(function(card) {
                     openCards[1].classList.add('show');
                     
                     openCards = [];
+                    
                 } else {
                     setTimeout(function() {
                         openCards.forEach(function(card) {
@@ -88,9 +87,41 @@ allCards.forEach(function(card) {
                     });
                     
                     openCards = [];
-                }, 1000);
-            }
+                }, 500);
+            }       
+                //incrementMove();
+                
             }
         }
     });
 });
+
+
+/*function incrementMove(){
+    moves += 1;
+}; */
+
+//count function for the timer
+var clicked = false;
+var sec = 0;
+
+function startClock() {
+    if (clicked === false) {
+        clock = setInterval("stopWatch()", 1000);
+        clicked = true;
+    }
+    else if (clicked === true) {
+    }
+}
+
+function stopWatch() {
+    sec++;
+    document.getElementById("timer").innerHTML = sec;
+}
+
+function stopClock() {
+    window.clearInterval(clock);
+    sec = 0;
+    document.getElementById("timer").innerHTML=0;
+    clicked = false;
+}

@@ -125,3 +125,8 @@ function stopClock() {
     document.getElementById("timer").innerHTML=0;
     clicked = false;
 }
+
+//reload
+function myFunction() {
+    location.reload();
+};

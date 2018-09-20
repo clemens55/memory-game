@@ -114,10 +114,8 @@ function increseMove() {
 function star() {
     if (move === 15) {
         document.getElementById('star-3').className = "fa fa-star-o";
-    } else if (move === 20) {
+    } else if (move === 23) {
         document.getElementById('star-2').className = "fa fa-star-o";
-    } else if (move === 25) {
-        document.getElementById('star-1').className = "fa fa-star-o";
     }
 }
 

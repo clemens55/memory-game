@@ -89,12 +89,12 @@ allCards.forEach(function(card) {
                     count += 1;
                     move += 1;
                     increseMove();
+                    star();
                     
                     //Finish Game
-                    if (count === 2) {
-                        //stopClock();
+                    if (count === 8) {
                         endGame(); 
-                    }
+                    }    
                     
                 } else {
                     setTimeout(function() {
@@ -102,10 +102,11 @@ allCards.forEach(function(card) {
                             card.classList.remove('open', 'show');
                     });
                     
-                    
                     move += 1;
                     increseMove();
+                    star();
                     openCards = [];
+                    
                 }, 500);
             }       
                 
@@ -119,6 +120,16 @@ function increseMove() {
     document.getElementById('moves').innerHTML = move;
 }
 
+//star rating
+function star() {
+    if (move === 15) {
+        document.getElementById('star-3').className = "fa fa-star-o";
+    } else if (move === 20) {
+        document.getElementById('star-2').className = "fa fa-star-o";
+    } else if (move === 25) {
+        document.getElementById('star-1').className = "fa fa-star-o";
+    }
+}
 
 //timer
 
@@ -146,12 +157,13 @@ function stopClock() {
 //reload
 function myFunction() {
     location.reload();
-};
+};  
 
-//Finish Game
+//finish game
 function endGame() {
+    const stars = document.getElementsByClassName('fa fa-star');
     var txt;
-    if (confirm(`Congrats! You just won the game in ${sec} seconds with /3 star rating. Do you want to play again?`)) {
+    if (confirm(`Congrats! You just won the game in ${sec} seconds with ${stars.length}/3 star rating. Do you want to play again?`)) {
         txt = "You pressed OK!";
     } else {
         txt = "You pressed Cancel!";

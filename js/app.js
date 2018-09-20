@@ -82,7 +82,7 @@ allCards.forEach(function(card) {
                     star();
                     
                     //Finish Game
-                    if (count === 2) {
+                    if (count === 8) {
                         endGame(); 
                     }    
                     

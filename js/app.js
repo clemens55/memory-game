@@ -53,15 +53,21 @@ function initGame() {
 }
 initGame();
 
+
+//Declare variables
 var allCards = document.querySelectorAll('.card');
 var openCards = [];
 var moves = document.getElementById('moves').textContent;
-let hours = 0;
-let minutes = 0;
-let seconds = 0;
+let count = 0;
 
+//count function for the timer
+var clicked = false;
+var sec = 0;
+
+//FlippingCards
 allCards.forEach(function(card) {
     card.addEventListener('click', function(e) {
+        //start Timer
         startClock();
         
         if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match')) {
@@ -70,6 +76,7 @@ allCards.forEach(function(card) {
             
             if (openCards.length == 2) {
                 if (openCards[0].dataset.card == openCards[1].dataset.card) {
+                    
                     openCards[0].classList.add('match');
                     openCards[0].classList.add('open');
                     openCards[0].classList.add('show');
@@ -79,6 +86,13 @@ allCards.forEach(function(card) {
                     openCards[1].classList.add('show');
                     
                     openCards = [];
+                    count += 1;
+                    
+                    //Finish Game
+                    if (count === 1) {
+                        //stopClock();
+                        endGame(); 
+                    }
                     
                 } else {
                     setTimeout(function() {
@@ -92,7 +106,7 @@ allCards.forEach(function(card) {
                 //incrementMove();
                 
             }
-        }
+        } 
     });
 });
 
@@ -101,9 +115,7 @@ allCards.forEach(function(card) {
     moves += 1;
 }; */
 
-//count function for the timer
-var clicked = false;
-var sec = 0;
+//timer
 
 function startClock() {
     if (clicked === false) {
@@ -130,3 +142,25 @@ function stopClock() {
 function myFunction() {
     location.reload();
 };
+
+//Finish Game
+function endGame() {
+    var txt;
+    if (confirm(`Congrats! You just won the game in ${sec} seconds with /3 star rating. Do you want to play again?`)) {
+        txt = "You pressed OK!";
+    } else {
+        txt = "You pressed Cancel!";
+    }
+    //document.getElementById("demo").innerHTML = txt;
+}
+
+
+
+//cheat
+document.getElementById("cheat").addEventListener("click", showAll);
+
+function showAll() {
+    allCards.classList.add('match');
+    allCards.classList.add('open');
+    allCards.classList.add('show');
+}

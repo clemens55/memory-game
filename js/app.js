@@ -44,7 +44,7 @@ function shuffle(array) {
 
 
 function initGame() {
-    var deck = document.querySelector(".deck");
+    var deck = document.querySelector('.deck');
     var cardHTML = shuffle(cards).map(function(card){
         return generateCard(card);
     });
@@ -57,8 +57,8 @@ initGame();
 //Declare variables
 var allCards = document.querySelectorAll('.card');
 var openCards = [];
-var moves = document.getElementById('moves').textContent;
 let count = 0;
+var move = 0;
 
 //count function for the timer
 var clicked = false;
@@ -87,9 +87,11 @@ allCards.forEach(function(card) {
                     
                     openCards = [];
                     count += 1;
+                    move += 1;
+                    increseMove();
                     
                     //Finish Game
-                    if (count === 1) {
+                    if (count === 2) {
                         //stopClock();
                         endGame(); 
                     }
@@ -100,20 +102,23 @@ allCards.forEach(function(card) {
                             card.classList.remove('open', 'show');
                     });
                     
+                    
+                    move += 1;
+                    increseMove();
                     openCards = [];
                 }, 500);
             }       
-                //incrementMove();
                 
             }
         } 
     });
 });
 
+//set up moves
+function increseMove() {
+    document.getElementById('moves').innerHTML = move;
+}
 
-/*function incrementMove(){
-    moves += 1;
-}; */
 
 //timer
 
@@ -152,15 +157,4 @@ function endGame() {
         txt = "You pressed Cancel!";
     }
     //document.getElementById("demo").innerHTML = txt;
-}
-
-
-
-//cheat
-document.getElementById("cheat").addEventListener("click", showAll);
-
-function showAll() {
-    allCards.classList.add('match');
-    allCards.classList.add('open');
-    allCards.classList.add('show');
 }

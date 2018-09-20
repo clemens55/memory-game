@@ -82,7 +82,7 @@ allCards.forEach(function(card) {
                     star();
                     
                     //Finish Game
-                    if (count === 8) {
+                    if (count === 2) {
                         endGame(); 
                     }    
                     
@@ -139,8 +139,7 @@ function stopWatch() {
 
 function stopClock() {
     window.clearInterval(clock);
-    sec = 0;
-    document.getElementById("timer").innerHTML=0;
+    document.getElementById("timer").innerHTML=sec;
     clicked = false;
 }
 
@@ -157,5 +156,6 @@ function endGame() {
         reload();
     } else {
         txt = "You pressed Cancel!";
+        stopClock();
     }
 }
